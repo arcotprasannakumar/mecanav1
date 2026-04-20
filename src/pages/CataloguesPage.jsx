@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { FaDownload, FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { catalogues } from "../data/masterData";
 import CatalogueFormGate from "../components/CatalogueFormGate";
@@ -36,18 +37,18 @@ function CatalogueCard({ title, image, to, onDownload }) {
         <Link
           to={to}
           aria-label={`Preview ${title}`}
-          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-base text-white transition hover:bg-black"
+          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-[17px] text-white transition hover:bg-black"
         >
-          <span aria-hidden="true">◉</span>
+          <FaEye aria-hidden="true" />
         </Link>
 
         <button
           type="button"
           aria-label={`Download ${title}`}
-          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-base text-white transition hover:bg-black"
+          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full bg-black/70 text-[17px] text-white transition hover:bg-black"
           onClick={onDownload}
         >
-          <span aria-hidden="true">↓</span>
+          <FaDownload aria-hidden="true" />
         </button>
       </div>
     </article>

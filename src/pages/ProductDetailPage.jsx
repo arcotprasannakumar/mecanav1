@@ -14,54 +14,64 @@ const tabs = [
 function ProductGallery({ images, title }) {
   if (!images.length) {
     return (
-      <div className="rounded-[14px] bg-[#b8b3b3] px-5 py-5 text-sm text-black/80">
+      <div className="rounded-[6px] bg-[#b3b3b3] px-6 py-6 text-sm text-black/80">
+        <h2 className="mb-4 text-lg font-semibold text-black">Gallery</h2>
         Gallery not available for this product yet.
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5">
-      {images.map((image, index) => (
-        <div
-          key={`${image}-${index}`}
-          className="overflow-hidden rounded-[8px] border border-white/10 bg-white/5"
-        >
-          <img
-            src={image}
-            alt={`${title} gallery image ${index + 1}`}
-            loading="lazy"
-            decoding="async"
-            className="h-24 w-full object-contain p-2"
-          />
-        </div>
-      ))}
+    <div className="rounded-[6px] bg-[#b3b3b3] px-5 py-6 text-black sm:px-6">
+      <h2 className="mb-4 text-lg font-semibold text-black">Gallery</h2>
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7">
+        {images.map((image, index) => (
+          <div
+            key={`${image}-${index}`}
+            className="aspect-square overflow-hidden rounded-[6px] bg-[#f1f1f1]"
+          >
+            <img
+              src={image}
+              alt={`${title} gallery image ${index + 1}`}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-contain p-2 sm:p-3"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 function ProductSpecsTable({ specs }) {
   return (
-    <div className="overflow-hidden rounded-[14px] border border-white/10 bg-[#111]">
+    <div className="overflow-hidden border border-white/10 bg-black shadow-[0_0_28px_rgba(255,255,255,0.05)]">
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse">
           <thead>
-            <tr className="bg-[#272423] text-left text-white">
-              <th className="px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em]">
+            <tr className="bg-[#242424] text-left text-white">
+              <th className="border-r border-white/10 px-5 py-4 text-sm font-semibold uppercase">
                 Feature
               </th>
-              <th className="px-5 py-4 text-sm font-semibold uppercase tracking-[0.18em]">
+              <th className="px-5 py-4 text-sm font-semibold uppercase">
                 Value
               </th>
             </tr>
           </thead>
           <tbody>
             {specs.map((spec, index) => (
-              <tr key={`${spec.feature}-${index}`} className={index % 2 === 0 ? "bg-[#111]" : "bg-[#1d1d1d]"}>
-                <td className="border-t border-white/10 px-5 py-4 text-sm font-medium uppercase text-[#aea8a2]">
+              <tr
+                key={`${spec.feature}-${index}`}
+                className={`group transition duration-300 hover:relative hover:z-[1] hover:shadow-[0_0_22px_rgba(255,255,255,0.22)] ${
+                  index % 2 === 0 ? "bg-[#090909]" : "bg-[#171717]"
+                }`}
+              >
+                <td className="border-r border-white/10 px-5 py-4 text-sm font-semibold uppercase text-white/60 transition duration-300 group-hover:text-white">
                   {spec.feature}
                 </td>
-                <td className="border-t border-white/10 px-5 py-4 text-sm text-white">
+                <td className="px-5 py-4 text-sm font-semibold text-white/90">
                   {spec.value}
                 </td>
               </tr>
@@ -70,6 +80,33 @@ function ProductSpecsTable({ specs }) {
         </table>
       </div>
     </div>
+  );
+}
+
+function ProductShowcasePanel({ title, image }) {
+  if (!image) {
+    return null;
+  }
+
+  return (
+    <section className="product-detail-showcase mx-auto mt-12 w-full max-w-6xl overflow-hidden rounded-[8px] bg-[#4a4949] px-6 py-10 text-white sm:px-8">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center">
+        <div>
+          <h2 className="font-['Poppins',sans-serif] text-4xl font-light text-white/70 sm:text-6xl">
+            {title}
+          </h2>
+        </div>
+
+        <div className="relative flex min-h-[260px] items-center justify-end">
+          <div className="product-detail-showcase-glow" />
+          <img
+            src={image}
+            alt={title}
+            className="product-detail-showcase-image relative z-[1] max-h-[330px] w-full max-w-[560px] object-contain"
+          />
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -417,26 +454,13 @@ function ProductDetailPage() {
           </section>
         </RevealOnScroll>
 
-        <section className="mx-auto mt-12 w-full max-w-6xl rounded-[8px] bg-[#4a4949] px-6 py-10 text-white sm:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_560px] lg:items-center">
-            <div>
-              <h2 className="font-['Poppins',sans-serif] text-4xl font-light text-white/70 sm:text-6xl">
-                {category?.title ?? "Product Family"}
-              </h2>
-            </div>
-
-            <div className="flex justify-end">
-              <img
-                src={product.cardImage}
-                alt={product.title}
-                className="max-h-[330px] w-full max-w-[560px] object-contain"
-              />
-            </div>
-          </div>
-        </section>
+        <ProductShowcasePanel
+          title={category?.title ?? "Product Family"}
+          image={category?.showcaseImage ?? category?.image ?? product.cardImage}
+        />
       </div>
 
-      <HomeLegacyPartnersSection />
+      {/* <HomeLegacyPartnersSection /> */}
     </section>
   );
 }

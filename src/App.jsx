@@ -32,6 +32,10 @@ function SiteLayout() {
   }, [location.pathname]);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
+
+  useEffect(() => {
     document.body.classList.toggle("mobile-menu-open", isMobileMenuOpen);
     return () => document.body.classList.remove("mobile-menu-open");
   }, [isMobileMenuOpen]);

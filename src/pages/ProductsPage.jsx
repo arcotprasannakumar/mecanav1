@@ -97,22 +97,22 @@ function ProductsGrid() {
 
   return (
     <div className="flex-1 bg-[#f5f5f5] p-4 md:p-6 lg:p-8">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {productCards.map((product) => (
           <button
             key={product.slug}
             type="button"
             onClick={() => navigate(`/products/category/${product.slug}`)}
-            className="group overflow-hidden bg-white text-left"
+            className="group overflow-hidden rounded-[4px] border-2 border-[#dedede] bg-white text-left"
           >
-            <div className="aspect-[4/3] overflow-hidden bg-[#eee]">
+            <div className="h-[245px] overflow-hidden bg-[#f2f2f2] sm:h-[265px] xl:h-[280px]">
               <img
                 src={product.image}
                 alt={product.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-105"
               />
             </div>
-            <h2 className="px-2 pb-2 pt-2 text-sm font-light text-gray-600 md:px-3 md:pb-3">
+            <h2 className="px-4 py-3 text-[15px] font-light leading-6 text-[#111]">
               {product.title}
             </h2>
           </button>
@@ -143,7 +143,7 @@ function ProductsPage() {
           <ProductsGrid />
         </div>
       </div>
-      <HomeLegacyPartnersSection />
+      {/* <HomeLegacyPartnersSection /> */}
     </section>
   );
 }

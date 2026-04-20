@@ -98,6 +98,40 @@ main {
   }
 }
 
+.product-detail-showcase {
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.product-detail-showcase-image {
+  animation: productDetailShowcaseScale 4s linear infinite;
+  filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.35)) contrast(110%) brightness(105%);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.product-detail-showcase-glow {
+  position: absolute;
+  bottom: 34px;
+  right: 10%;
+  width: min(360px, 70%);
+  height: 70px;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.32), transparent 72%);
+  filter: blur(14px);
+  opacity: 0.8;
+}
+
+@keyframes productDetailShowcaseScale {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
 .legacy-site-shell .container {
   max-width: 100%;
   margin: 0 auto;
@@ -565,7 +599,7 @@ main {
   top: 0;
   left: 0;
   width: 0;
-  height: 120px;
+  height: 82px;
   pointer-events: none;
   opacity: 0;
   transition: left 0.4s ease, opacity 0.3s ease;
@@ -578,24 +612,24 @@ main {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 30px;
-  height: 6px;
-  background: #fff;
+  width: 24px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.82);
   border-radius: 3px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.45);
 }
 
 .spotlight::after {
   content: "";
   position: absolute;
-  top: 6px;
+  top: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 80%);
-  clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%);
-  filter: blur(2px);
+  width: 88px;
+  height: 80px;
+  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0) 78%);
+  clip-path: polygon(47% 0, 53% 0, 88% 100%, 12% 100%);
+  filter: blur(3px);
   z-index: 1;
 }
 

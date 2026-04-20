@@ -83,20 +83,20 @@ function ProductSidebar({ categories, activeCategorySlug, productCounts = {} }) 
 function ProductCard({ title, image, to, className = "", captionClassName = "" }) {
   return (
     <article
-      className={`group overflow-hidden rounded-[20px] border border-black/10 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(0,0,0,0.12)] ${className}`}
+      className={`group overflow-hidden rounded-[4px] border-2 border-[#dedede] bg-white ${className}`}
     >
       <Link to={to} className="block h-full">
-        <div className="overflow-hidden bg-white">
+        <div className="h-[245px] overflow-hidden bg-[#f2f2f2] sm:h-[265px] xl:h-[280px]">
           <img
             src={image}
             alt={title}
             loading="lazy"
             decoding="async"
-            className="h-[220px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[260px]"
+            className="h-full w-full object-contain p-5 transition duration-500 group-hover:scale-105 sm:p-6"
           />
         </div>
         <h2
-          className={`px-4 py-3 font-['Poppins',sans-serif] text-[15px] font-light leading-6 text-[#6e6e6e] ${captionClassName}`}
+          className={`px-4 py-3 font-['Poppins',sans-serif] text-[15px] font-light leading-6 text-[#111] ${captionClassName}`}
         >
           {title}
         </h2>
@@ -147,7 +147,7 @@ function ProductCategoryPage() {
           productCounts={productCounts}
         />
 
-        <div className="flex-1 bg-[#fffafa] p-4 sm:p-6 lg:p-10">
+        <div className="flex-1 bg-[#fffafa] p-4 sm:p-6 lg:p-8">
           {displayProducts.length ? (
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
               {displayProducts.map((product) => (
@@ -169,7 +169,7 @@ function ProductCategoryPage() {
         </div>
       </div>
 
-      <HomeLegacyPartnersSection />
+      {/* <HomeLegacyPartnersSection /> */}
     </section>
   );
 }

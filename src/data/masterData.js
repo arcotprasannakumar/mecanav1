@@ -1220,6 +1220,26 @@ const floodImage = getAssetUrl("Final-Products/Product spec imgs/flood light/Flo
 const dmxImage = getAssetUrl("Final-Products/Product spec imgs/drivers and controllers/contro3.webp");
 const driverImage = getAssetUrl("Final-Products/Product spec imgs/drivers and controllers/driver2.webp");
 
+const productShowcaseImages = {
+  "pixel-led-strip": getAssetUrl("Final-Products/Product spec imgs/strip_on.webp"),
+  "neon-flex-led": getAssetUrl("Final-Products/Product spec imgs/neon_flex_on.webp"),
+  "pixel-led-bars": getAssetUrl("Final-Products/Product spec imgs/pixel led bar on.webp"),
+  "pixel-led-panel": getAssetUrl("Final-Products/Product spec imgs/pixel panel on.webp.webp"),
+  "pixel-dot-lights": getAssetUrl("Final-Products/Product spec imgs/pixel_dot_on.webp"),
+  "wall-washers-lights": getAssetUrl("Final-Products/Product spec imgs/wallwasher_on.webp"),
+  "pillar-highlighters": getAssetUrl("Final-Products/Product spec imgs/piller-highlighter-on.webp"),
+  "fan-projection-lights": getAssetUrl("Final-Products/Product spec imgs/fan projection on 1.webp"),
+  "wall-window-lights": getAssetUrl("Final-Products/Product spec imgs/wall window on.webp"),
+  "gobo-lights": getAssetUrl("Final-Products/Product spec imgs/gobo_on.webp"),
+  "pool-lights": getAssetUrl("Final-Products/Product spec imgs/pool_light.webp"),
+  "fountain-lights": getAssetUrl("Final-Products/Product spec imgs/fountain on.webp"),
+  "recessed-ground-lights": getAssetUrl("Final-Products/Product spec imgs/ground light on.webp"),
+  "tree-highlighters": getAssetUrl("Final-Products/Product spec imgs/treehighlighters_on.webp"),
+  "flood-lights": getAssetUrl("Final-Products/Product spec imgs/flood_on.webp"),
+  "dmx-controllers": getAssetUrl("Final-Products/Product spec imgs/DMX-Controller.webp"),
+  drivers: getAssetUrl("Final-Products/Product spec imgs/Driver.webp"),
+};
+
 const productCategories = [
   {
     slug: "pixel-led-strip",
@@ -1813,6 +1833,10 @@ const productCategories = [
   ],
 },
 ];
+
+productCategories.forEach((category) => {
+  category.showcaseImage = productShowcaseImages[category.slug] ?? category.image;
+});
 
 const sharedGallery = [
   strip5,
