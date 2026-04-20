@@ -32,7 +32,7 @@ function ProductGallery({ images, title }) {
             alt={`${title} gallery image ${index + 1}`}
             loading="lazy"
             decoding="async"
-            className="h-24 w-full object-cover"
+            className="h-24 w-full object-contain p-2"
           />
         </div>
       ))}

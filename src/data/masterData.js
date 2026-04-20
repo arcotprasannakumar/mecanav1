@@ -100,6 +100,7 @@ import tiktokIcon from "../assets/icons/tiktok.webp";
 import threadsIcon from "../assets/icons/threads.webp";
 import redditIcon from "../assets/icons/reddit.webp";
 import telegramIcon from "../assets/icons/telegram.webp";
+import legacyProductSpecs from "./legacyProductSpecs";
 import ww12vNp11 from "../assets/images/Final-Products/pixel-led-strips/WW-12V-NP-1.1.webp";
 import ww12vNp12 from "../assets/images/Final-Products/pixel-led-strips/WW-12V-NP-1.2.webp";
 import ww12vNp13 from "../assets/images/Final-Products/pixel-led-strips/WW-12V-NP-1.3.webp";
@@ -876,7 +877,25 @@ const navigation = {
   },
 };
 
+const imageAssets = import.meta.glob("../assets/images/Final-Products/**/*.{webp,png,jpg,jpeg}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const normalizeAssetPath = (path) =>
+  String(path)
+    .replace(/\\/g, "/")
+    .replace(/^\.\.\/assets\/images\//, "")
+    .toLowerCase();
+
+const imageAssetMap = new Map(
+  Object.entries(imageAssets).map(([path, url]) => [normalizeAssetPath(path), url]),
+);
+
 const getAssetUrl = (path) => new URL(`../assets/images/${path}`, import.meta.url).href;
+
+const getExistingAssetUrl = (path) => imageAssetMap.get(normalizeAssetPath(path));
 
 const pixelStripBase = "Final-Products/Product spec imgs/pixel led strip";
 
@@ -1880,6 +1899,192 @@ const categoryGalleryMap = {
   ],
 };
 
+const normalizeSlug = (value) => String(value ?? "").trim().toLowerCase();
+
+const heroFolderByCategory = {
+  "pixel-led-strip": "Final-Products/pixel-led-strips",
+  "neon-flex-led": "Final-Products/Neon",
+  "pixel-led-bars": "Final-Products/pixel-led bars",
+  "pixel-led-panel": "Final-Products/pixel-led-panels",
+  "pixel-dot-lights": "Final-Products/dot-lights",
+  "wall-washers-lights": "Final-Products/wall-washers",
+  "pillar-highlighters": "Final-Products/piller-highlighters",
+  "wall-window-lights": "Final-Products/wall-windows",
+  "pool-lights": "Final-Products/pool-lights",
+  "fountain-lights": "Final-Products/fountain-lights",
+  "recessed-ground-lights": "Final-Products/ground-lights",
+  "flood-lights": "Final-Products/flood-lights",
+};
+
+const staticHeroImagesBySlug = {
+  "fan-projection-1": [
+    getExistingAssetUrl("Final-Products/Other-products/F1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/F1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/F1.webp"),
+  ],
+  "fan-projection-2": [
+    getExistingAssetUrl("Final-Products/Other-products/F1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/F2.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/F2.webp"),
+  ],
+  "gobo-lights-1": [
+    getExistingAssetUrl("Final-Products/Other-products/g1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g1.webp"),
+  ],
+  "gobo-lights-2": [
+    getExistingAssetUrl("Final-Products/Other-products/g2.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g2.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g2.webp"),
+  ],
+  "gobo-lights-3": [
+    getExistingAssetUrl("Final-Products/Other-products/g3.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g3.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g3.webp"),
+  ],
+  "gobo-lights-4": [
+    getExistingAssetUrl("Final-Products/Other-products/g4.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g4.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/g4.webp"),
+  ],
+  "tree-highlighters_specifi": [
+    getExistingAssetUrl("Final-Products/Other-products/t1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t1.webp"),
+  ],
+  "tree-highlighter-lights-1_specifi": [
+    getExistingAssetUrl("Final-Products/Other-products/t2.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t2.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t2.webp"),
+  ],
+  "tree-highlighter-lights-2_specifi": [
+    getExistingAssetUrl("Final-Products/Other-products/t3.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t3.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t3.webp"),
+  ],
+  "tree-highlighter-lights-3_specifi": [
+    getExistingAssetUrl("Final-Products/Other-products/t4.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t4.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/t4.webp"),
+  ],
+  "dmx-controllers_specifi-1": [
+    getExistingAssetUrl("Final-Products/dmx-controllers/dmx-contro-1.webp"),
+    getExistingAssetUrl("Final-Products/dmx-controllers/dmx-contro-2.webp"),
+    getExistingAssetUrl("Final-Products/dmx-controllers/dmx-contro-1.webp"),
+  ],
+  "drivers-1_specifi": [
+    getExistingAssetUrl("Final-Products/Other-products/D1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/D2.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/D1.webp"),
+  ],
+  "drivers-2_specifi": [
+    getExistingAssetUrl("Final-Products/Other-products/D1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/D1.webp"),
+    getExistingAssetUrl("Final-Products/Other-products/D1.webp"),
+  ],
+};
+
+const parseHeroSlug = (slug) => {
+  const normalizedSlug = normalizeSlug(slug);
+  const color = normalizedSlug.match(/^(rgbww|rgbw|rgb|ww)/)?.[1];
+  const voltage = normalizedSlug.match(/(\d+(?:-\d+)?v)/)?.[1];
+  const pixel = normalizedSlug.includes("non-pixel") ? "NP" : "P";
+
+  if (!color || !voltage) {
+    return null;
+  }
+
+  return { color: color.toUpperCase(), voltage, pixel };
+};
+
+const heroVoltageCandidatesFor = (categorySlug, voltage, color) => {
+  if (voltage === "24-48v") {
+    return ["24V_48V", "24_48V"];
+  }
+
+  if (categorySlug === "pixel-led-strip") {
+    if (color === "RGB") {
+      return ["12V"];
+    }
+
+    if (color === "RGBW") {
+      return ["24V"];
+    }
+  }
+
+  if (["pixel-led-panel", "wall-window-lights"].includes(categorySlug)) {
+    return voltage === "24v" ? ["24_48V", "24V_48V"] : ["220V"];
+  }
+
+  if (["pixel-dot-lights", "wall-washers-lights"].includes(categorySlug)) {
+    return voltage === "24v" ? ["12V"] : ["24V"];
+  }
+
+  return [voltage.toUpperCase()];
+};
+
+const heroColorCandidatesFor = (categorySlug, color) =>
+  categorySlug === "recessed-ground-lights" ? [color, color.toLowerCase()] : [color];
+
+const heroFileCandidatesFor = (folder, base, categorySlug) => {
+  const suffixes = [
+    "1.1",
+    "1.2",
+    "1.3",
+    "1.3 (2)",
+    "1.3 (3)",
+    "1.1 (2)",
+    "1.1 (3)",
+  ];
+  const neonSuffixes = [
+    "1.1-NEON",
+    "1.2-NEON",
+    "1.3-NEON",
+    "1.1",
+    "1.2",
+    "1.3",
+  ];
+  const activeSuffixes = categorySlug === "neon-flex-led" ? neonSuffixes : suffixes;
+
+  return activeSuffixes
+    .map((suffix) => getExistingAssetUrl(`${folder}/${base}-${suffix}.webp`))
+    .filter(Boolean);
+};
+
+const getLegacyHeroImages = (categorySlug, slug) => {
+  const normalizedSlug = normalizeSlug(slug);
+  const staticImages = staticHeroImagesBySlug[normalizedSlug]?.filter(Boolean);
+
+  if (staticImages?.length) {
+    return staticImages;
+  }
+
+  const folder = heroFolderByCategory[categorySlug];
+  const heroParts = parseHeroSlug(slug);
+
+  if (!folder || !heroParts) {
+    return [];
+  }
+
+  const baseCandidates = heroColorCandidatesFor(categorySlug, heroParts.color).flatMap((color) =>
+    heroVoltageCandidatesFor(categorySlug, heroParts.voltage, color).map((voltage) =>
+      categorySlug === "neon-flex-led"
+        ? `${color}-${heroParts.pixel}-${voltage}`
+        : `${color}-${voltage}-${heroParts.pixel}`,
+    ),
+  );
+
+  for (const base of baseCandidates) {
+    const images = heroFileCandidatesFor(folder, base, categorySlug);
+
+    if (images.length) {
+      return images.slice(0, 3);
+    }
+  }
+
+  return [];
+};
+
 const pixelStripDocuments = [
   { label: "Pixel LED Strip Catalogue", href: pixelLedStripPdf, type: "PDF" },
 ];
@@ -1978,7 +2183,7 @@ const migratedProducts = [
     title: "RGB - Pixel - 24V Pixel LED Strip",
     categorySlug: "pixel-led-strip",
     cardImage: strip12,
-    heroImages: [strip12, strip13, strip14],
+    heroImages: getLegacyHeroImages("pixel-led-strip", "rgb-24v-pixel-led-strip"),
     gallery: sharedGallery,
     description: "Addressable RGB strip for vibrant long-run color animations.",
     overview: "Ideal for stage designs, clubs, and building outlines.",
@@ -2195,9 +2400,22 @@ const productFallbacks = {
   },
 };
 
-const normalizeSlug = (value) => String(value ?? "").trim().toLowerCase();
-
 const uniqueList = (items) => [...new Set(items.filter(Boolean))];
+
+const legacySpecAliases = {
+  "rgbw-24v-pixel-neon-flex": "rgbw-24v-neonflex-pixel",
+  "rgbww-12v-non-pixel-neon-flex": "rgbww-12v-neonflex-non-pixel",
+  "rgbww-12v-pixel-neon-flex": "rgbww-12v-neonflex-pixel",
+  "rgbww-24v-non-pixel-led-strip": "rgbww-24v-non-pixel-led-strip_specifi",
+  "rgbww-24v-non-pixel-neon-flex": "rgbww-24v-neonflex-non-pixel",
+  "rgbww-24v-pixel-neon-flex": "rgbww-24v-neonflex-pixel",
+};
+
+const getLegacyProductSpecs = (slug) => {
+  const normalizedSlug = normalizeSlug(slug);
+
+  return legacyProductSpecs[normalizedSlug] ?? legacyProductSpecs[legacySpecAliases[normalizedSlug]];
+};
 
 const defaultSpecsFor = (category, item) => [
   { feature: "Category", value: category.title },
@@ -2208,11 +2426,10 @@ const defaultSpecsFor = (category, item) => [
 const makeSidebarProduct = (category, item) => {
   const fallbackAssets = productFallbacks[category.slug] ?? {};
   const gallery = categoryGalleryMap[category.slug] ?? [];
-  const heroImages = uniqueList([
-    item.image,
-    ...(fallbackAssets.heroImages ?? []),
-    category.image,
-  ]);
+  const legacyHeroImages = getLegacyHeroImages(category.slug, item.slug);
+  const heroImages = legacyHeroImages.length
+    ? legacyHeroImages
+    : uniqueList([...(fallbackAssets.heroImages ?? []), category.image]);
   const title = item.label ?? fallbackAssets.title ?? category.title;
 
   return {
@@ -2230,7 +2447,7 @@ const makeSidebarProduct = (category, item) => {
       "Category brochure and product imagery available",
       "Specification support available on request",
     ],
-    technicalSpecs: defaultSpecsFor(category, { ...item, label: title }),
+    technicalSpecs: getLegacyProductSpecs(item.slug) ?? defaultSpecsFor(category, { ...item, label: title }),
     productCodes: [],
     applications: [category.title],
     documents: fallbackAssets.documents ?? [],
@@ -2249,7 +2466,10 @@ const generatedProductMap = new Map(
 );
 
 migratedProducts.forEach((product) => {
-  generatedProductMap.set(normalizeSlug(product.slug), product);
+  generatedProductMap.set(normalizeSlug(product.slug), {
+    ...product,
+    technicalSpecs: getLegacyProductSpecs(product.slug) ?? product.technicalSpecs,
+  });
 });
 
 export const products = Array.from(generatedProductMap.values());
