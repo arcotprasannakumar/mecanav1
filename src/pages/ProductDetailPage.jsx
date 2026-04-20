@@ -12,12 +12,6 @@ const tabs = [
 ];
 
 function ProductGallery({ images, title }) {
-  const [activeImage, setActiveImage] = useState(images[0] ?? null);
-
-  useEffect(() => {
-    setActiveImage(images[0] ?? null);
-  }, [images]);
-
   if (!images.length) {
     return (
       <div className="rounded-[14px] bg-[#b8b3b3] px-5 py-5 text-sm text-black/80">
@@ -27,39 +21,21 @@ function ProductGallery({ images, title }) {
   }
 
   return (
-    <div className="space-y-5">
-      <div className="overflow-hidden rounded-[14px] bg-[#050505]">
-        {activeImage ? (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5">
+      {images.map((image, index) => (
+        <div
+          key={`${image}-${index}`}
+          className="overflow-hidden rounded-[8px] border border-white/10 bg-white/5"
+        >
           <img
-            src={activeImage}
-            alt={title}
+            src={image}
+            alt={`${title} gallery image ${index + 1}`}
             loading="lazy"
             decoding="async"
-            className="h-[300px] w-full object-cover sm:h-[420px]"
+            className="h-24 w-full object-cover"
           />
-        ) : null}
-      </div>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-5">
-        {images.map((image, index) => (
-          <button
-            key={`${image}-${index}`}
-            type="button"
-            className={`overflow-hidden rounded-[8px] border bg-white/5 transition ${
-              activeImage === image ? "border-white/70" : "border-white/10 hover:border-white/35"
-            }`}
-            onClick={() => setActiveImage(image)}
-            aria-label={`View gallery image ${index + 1}`}
-          >
-            <img
-              src={image}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="h-24 w-full object-cover"
-            />
-          </button>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -165,8 +141,8 @@ function ProductDetailPage() {
   );
 
   const galleryImages = useMemo(
-    () => [...new Set([...heroImages, ...(product?.gallery ?? [])].filter(Boolean))],
-    [heroImages, product],
+    () => [...new Set((product?.gallery ?? []).filter(Boolean))],
+    [product],
   );
 
   useEffect(() => {

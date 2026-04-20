@@ -1814,6 +1814,72 @@ const sharedGallery = [
   strip20,
 ];
 
+const categoryGalleryMap = {
+  "pixel-led-strip": sharedGallery,
+  "neon-flex-led": Object.values(neonFlexImages),
+  "pixel-led-bars": Object.values(pixelLedBarsImages),
+  "pixel-led-panel": Object.values(pixelLedPanelImages),
+  "pixel-dot-lights": Object.values(pixelDotLightsImages),
+  "wall-washers-lights": [
+    wallWashersImages.ww24vNonPixel,
+    wallWashersImages.ww24vPixel,
+    wallWashersImages.ww48vNonPixel,
+    wallWashersImages.ww48vPixel,
+    wallWashersImages.rgb24vNonPixel,
+    wallWashersImages.rgb24vPixel,
+    wallWashersImages.rgb48vNonPixel,
+    wallWashersImages.rgb48vPixel,
+    wallWashersImages.rgbw24vNonPixel,
+    wallWashersImages.rgbw24vPixel,
+    wallWashersImages.rgbww48vPixel,
+    wallWashersImages.rgbw48vPixel,
+    wallWashersImages.rgbww24vNonPixel,
+    wallWashersImages.rgbww24vPixel,
+    wallWashersImages.rgbww48vNonPixel,
+    wallWashersImages.rgbw48vNonPixel,
+  ],
+  "pillar-highlighters": Object.values(pillarHighlightersImages),
+  "fan-projection-lights": [
+    fanProjectionImages.fanProjection1,
+    fanProjectionImages.fanProjection2,
+    getAssetUrl("Final-Products/Product spec imgs/fan projection/fan3.webp"),
+  ],
+  "wall-window-lights": Object.values(wallWindowImages),
+  "gobo-lights": [
+    goboImages.gobo2,
+    goboImages.gobo3,
+    goboImages.gobo4,
+    goboImages.gobo1,
+  ],
+  "pool-lights": [
+    poolLightsImages.ww24_48vNonPixel,
+    poolLightsImages.ww24_48vPixel,
+    poolLightsImages.ww220vNonPixel,
+    poolLightsImages.ww220vPixel,
+    poolLightsImages.rgb24_48vNonPixel,
+    poolLightsImages.rgb24_48vPixel,
+    poolLightsImages.rgb220vNonPixel,
+    poolLightsImages.rgb220vPixel,
+    poolLightsImages.rgbw24_48vNonPixel,
+    poolLightsImages.rgbw24_48vPixel,
+    getAssetUrl("Final-Products/Product spec imgs/pool lights/pool11.webp"),
+    getAssetUrl("Final-Products/Product spec imgs/pool lights/pool12.webp"),
+  ],
+  "fountain-lights": Object.values(fountainLightsImages),
+  "recessed-ground-lights": Object.values(groundLightsImages),
+  "tree-highlighters": Object.values(treeHighlighterImages),
+  "flood-lights": Object.values(floodLightsImages),
+  "dmx-controllers": [
+    dmxControllerImages.dmx3,
+    dmxControllerImages.dmx2,
+    dmxControllerImages.dmx1,
+  ],
+  drivers: [
+    driverImages.driver2,
+    driverImages.driver1,
+  ],
+};
+
 const pixelStripDocuments = [
   { label: "Pixel LED Strip Catalogue", href: pixelLedStripPdf, type: "PDF" },
 ];
@@ -2141,6 +2207,7 @@ const defaultSpecsFor = (category, item) => [
 
 const makeSidebarProduct = (category, item) => {
   const fallbackAssets = productFallbacks[category.slug] ?? {};
+  const gallery = categoryGalleryMap[category.slug] ?? [];
   const heroImages = uniqueList([
     item.image,
     ...(fallbackAssets.heroImages ?? []),
@@ -2154,7 +2221,7 @@ const makeSidebarProduct = (category, item) => {
     categorySlug: category.slug,
     cardImage: item.image ?? heroImages[0] ?? category.image,
     heroImages,
-    gallery: heroImages,
+    gallery,
     description: category.description,
     overview: category.description,
     productInfo: `${title} belongs to the ${category.title} family. This page connects the product to its primary category, brochure assets, and available specification context.`,
